@@ -1,7 +1,6 @@
 # This module developed specifically for interaction with web UI of Tech Church
 # and able to transfer fetched response as Json or HTML structure into another modules
 
-
 import requests
 import json
 import texttable
@@ -42,59 +41,10 @@ def get_certain_author_publications(author_name):  # Will return response as a j
     return json.loads(fetch_url(url))
 
 
-def get_certain_subject_publications(subject, pg_num):  # Will return response as a json object
-    url = TECHS_ENDPOINT.format(category_num=categories[subject], page_number=pg_num)
+def get_certain_subject_publications(subject_code, pg_num):  # Will return response as a json object
+    url = TECHS_ENDPOINT.format(category_num=subject_code, page_number=pg_num)
     return json.loads(fetch_url(url))
-
-
-def show_subject_selection_menu():
-    print('Nice, Welcome to the subject selection section. '
-          'Please select your intended fetching procedure based on following guid table')
-
-    tableObj = texttable.Texttable(120)
-    tableObj.set_cols_align(["c", "c"])
-    tableObj.set_cols_dtype(["i", "t"])
-    tableObj.set_cols_valign(["m", "m"])
-    tableObj.add_rows([
-        ["Activation Key", "Subject"],
-        [1, 'Live Fetching From Website'],
-        [2, 'Fetching From DB (Stored Records)']
-    ])
-    print(tableObj.draw())
-    online = input('Your selection option: ')
-
-
-
-    print('Please select your intended subject based on following guid table')
-
-    tableObj = texttable.Texttable(120)
-    tableObj.set_cols_align(["c", "c"])
-    tableObj.set_cols_dtype(["i", "t"])
-    tableObj.set_cols_valign(["m", "m"])
-    tableObj.add_rows([
-        ["Activation Key", "Subject"],
-        [1, 'Apps'],
-        [2, 'Startups'],
-        [3, 'Venture'],
-        [4, 'Security'],
-        [5, 'AI'],
-        [6, 'Crypto'],
-        [7, 'Fintech']
-    ])
-    print(tableObj.draw())
-    subj = input('Your selection option: ')
-
-    if subj.isnumeric():
-        category_code = list(categories.values())[int(subj)-1]
-        if online == '1':
-            get_certain_subject_publications(category_code, 1)
-
 
 
 def get_publication_tags(soup):
     print(soup)
-
-#get_certain_subject_publications('fintech')
-#print(get_certain_author_publications('natasha-lomas'))
-show_subject_selection_menu()
-
