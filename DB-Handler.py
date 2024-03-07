@@ -17,7 +17,7 @@ def setup_table_in_db():
 def fetch_db_column(column):  # Get all record of a certain DB column
     connection = sqlite3.connect("cached.db")
     cursor = connection.cursor()
-    resp = cursor.execute(f"SELECT {column} FROM books").fetchall()
+    resp = cursor.execute(f"SELECT {column} FROM magazines").fetchall()
     connection.close()
     return resp
 
@@ -38,7 +38,7 @@ def insert_record_list_to_db(records):
         connection.commit()
 
 
-def fetch_db_record_using_certain_fetched_term(column_name, column_value):
+def fetch_db_record_using_certain_value_at_certain_column(column_name, column_value):
     # Get record with certain value at certain columns
     connection = sqlite3.connect("cached.db")
     with connection:

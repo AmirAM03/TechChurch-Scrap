@@ -1,19 +1,18 @@
 import sys
 import times
-import
+import requests
 from bs4 import BeautifulSoup
 import texttable
 
 
-def print_results_table(books_list):
+def print_results_table(magazines_list):
     table = texttable.Texttable(120)
-    table.set_cols_align(["c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c"])
-    table.set_cols_dtype(["t", "t", "t", "t", "i", "i", "t", "t", "t", "t", "t"])
-    table.set_cols_valign(["m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m"])
+    table.set_cols_align(["c", "c", "c", "c", "c", "c"])
+    table.set_cols_dtype(["t", "t", "t", "t", "t", "t"])
+    table.set_cols_valign(["m", "m", "m", "m", "m", "m"])
     table.add_row(
-        ["Relevant Fetched Term", "Author", "Title", "Publisher", "Publication Year", "Pages Count", "Language",
-         "File Size", "Extension", "1st Path", "2nd Path"])
-    for record in books_list:
+        ["Relevant Search Terms", "Author(s)", "Category", "Tags", "Publication Date", "Link"])
+    for record in magazines_list:
         table.add_row(record)
     print(table.draw())
 
@@ -109,11 +108,11 @@ if __name__ == "__main__":
     tableObj.set_cols_valign(["t", "t", "m", "b"])
     tableObj.add_rows([
         ["Activation Key", "Option Name", "Need Connection", "Option Description"],
-        [1, 'Fetch A Term', '✅', 'Give a term to program then get all existed relevant books in LibGen'],
-        [2, 'Get Cached Terms', '❌', 'Get the list of already fetched terms and cached in program data base'],
+        [1, 'Search For Relevant Publications to a term', '❌', 'Give a term to program then get all existed relevant pubs in our DB'],
+        [2, 'Get Cached Subjects', '❌', 'Get the list of already fetched terms and cached in program data base'],
         [3, 'Check Fetch Status', '❌', 'Give a term to program to check fetch status of it'],
-        [4, 'Re-Fetch an existing term', '✅',
-         'Fetch an already fetched term again and replace new results instead of previous records into data base'],
+        [4, 'Re-Fetch an existing Subject', '✅',
+         'Fetch an already fetched term again and replace new publication results instead of previous records into data base'],
         [5, 'Clean DB', '❌', 'Clear all Data Base records (Reset DB)']
     ])
     print(tableObj.draw())
